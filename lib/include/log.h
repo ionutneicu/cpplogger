@@ -194,7 +194,7 @@ public:
 	{
 		{
 			std::unique_lock<std::mutex> lock( m_log_queue_mutex );
-			m_log_queue.emplace( std::move(entry));
+			m_log_queue.emplace(std::move(entry));
 		}
 		m_log_queue_has_data_condition.notify_one();
 	}
@@ -245,6 +245,13 @@ static void log_entry_proxy(const log_level_t & level,
 	static constexpr char fmt[] = __format__;\
 	log_entry_proxy( __level__,  __FILE__, __LINE__, fmt, __VA_ARGS__ );\
 }
+
+#define LOG_VERBOSE( __format__, ... ) 	LOG(LOG_LEVEL_VERBOSE, __format__, __VA_ARGS__)
+#define LOG_DEBUG( __format__, ... ) 	LOG(LOG_LEVEL_DEBUG, __format__, __VA_ARGS__)
+#define LOG_INFO( __format__, ... ) 	LOG(LOG_LEVEL_INFO, __format__, __VA_ARGS__)
+#define LOG_WARN( __format__, ... ) 	LOG(LOG_LEVEL_WARNING, __format__, __VA_ARGS__)
+#define LOG_ERROR( __format__, ... ) 	LOG(LOG_LEVEL_ERROR, __format__, __VA_ARGS__)
+#define LOG_CRIT( __format__, ... ) 	LOG(LOG_LEVEL_CRITICAL, __format__, __VA_ARGS__)
 
 #define LOG_TERMINATE() logger::get_instance().terminate();
 
