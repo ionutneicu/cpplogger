@@ -2,7 +2,7 @@
 A simple C++ 11 logging module
 
   Copyright 2024 Ionut Neicu
-  This is a simple yet usable log class written in C++11
+  This is a simple yet usable log class written in C++11 ( for C++20 or newer, use cpp20 branch )
  
   Features:
      - simple
