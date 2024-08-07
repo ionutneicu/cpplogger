@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.0.2)
 project(cpploger)
 SET(CMAKE_BUILD_TYPE Debug)
-SET(CMAKE_CXX_STANDARD 11)
+SET(CMAKE_CXX_STANDARD 20)
 
 file(GLOB cpplog_SRC ./src/*.cpp ./src/*.h )
 add_library(cpplog SHARED ${cpplog_SRC})

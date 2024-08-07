@@ -5,6 +5,7 @@
 #include <mutex>
 #include <sstream>
 #include <functional>
+#include <source_location>
 
 struct logger
 {
@@ -59,10 +60,10 @@ struct logger
                 return *this;
             }
 
-            category& set_source_location( std::string file, size_t line )
+            category& set_source_location( std::source_location & src_location )
             {
-                m_current_file = file;
-                m_current_line = line;
+                m_current_file = src_location.file_name();
+                m_current_line = src_location.line();
                 return *this;
             }
 
@@ -99,24 +100,24 @@ struct logger
 
 
 
-    static category_wrapper verbose( std::string file = __FILE__, size_t line = __LINE__ )
+    static category_wrapper verbose( std::source_location src_location = std::source_location::current() )
     {
-        return category_wrapper(m_verbose.set_source_location( file, line ));
+        return category_wrapper(m_verbose.set_source_location( src_location ));
     }
 
-    static category_wrapper debug(std::string file = __FILE__, size_t line = __LINE__ )
+    static category_wrapper debug( std::source_location src_location = std::source_location::current() )
     {
-        return category_wrapper(m_debug.set_source_location( file, line ));
+        return category_wrapper(m_debug.set_source_location( src_location ));
     }
 
-    static category_wrapper warn( std::string file = __FILE__, size_t line = __LINE__ )
+    static category_wrapper warn( std::source_location src_location = std::source_location::current()  )
     {
-        return category_wrapper(m_warn.set_source_location( file, line ));
+        return category_wrapper(m_warn.set_source_location( src_location ));
     }
 
-    static category_wrapper error(std::string file = __FILE__, size_t line = __LINE__ )
+    static category_wrapper error( std::source_location src_location = std::source_location::current() )
     {
-        return category_wrapper(m_error.set_source_location( file, line ));
+        return category_wrapper(m_error.set_source_location( src_location ));
     }
 
     static void set_level( size_t new_level )

@@ -1,5 +1,5 @@
 # cpplogger
-A simple C++ 11 logging module
+A simple C++ 20 logging module ( for C++ 11 or newer, checkout the "main" branch )
 
   Copyright 2024 Ionut Neicu
   This is a simple yet usable log class written in C++11
